@@ -1,6 +1,6 @@
 import "./MovieCard.css";
 
-function MovieCard({ title, year, genre, rating, poster, available }) {
+function MovieCard({ title, year, genre, rating, poster, available,duration }) {
   return (
     <article className="movie-card">
       <div className="movie-card__poster">
