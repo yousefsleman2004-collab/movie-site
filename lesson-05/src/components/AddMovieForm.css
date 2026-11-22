@@ -1,0 +1,77 @@
+/* כרטיס לבן עם הטופס */
+.add-movie {
+  margin-top: 48px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.add-movie__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* רשת: כמה עמודות של 160px שנכנסות בשורה */
+.add-movie__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.add-movie__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* שם הסרט — שדה רחב */
+.add-movie__field--wide {
+  grid-column: span 2;
+}
+
+.add-movie__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.add-movie__input {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.add-movie__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.add-movie__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.add-movie__check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+/* הכפתור — בשורה נפרדת, בסוף */
+.add-movie__actions {
+  grid-column: 1 / -1;
+}

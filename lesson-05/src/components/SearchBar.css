@@ -1,0 +1,42 @@
+/* שורת החיפוש: שדה חיפוש רחב ושתי רשימות בחירה */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.search-bar__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 150px;
+}
+
+/* שדה החיפוש תופס את כל המקום שנשאר */
+.search-bar__field--grow {
+  flex-grow: 1;
+}
+
+.search-bar__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.search-bar__input {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.search-bar__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
