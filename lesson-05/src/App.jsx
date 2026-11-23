@@ -8,11 +8,22 @@ import { useState } from "react";
 
 function App() {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [query,setquery]=useState("")
 
   const topRated = movies.filter(movie => movie.rating >= 8.7);
-  const shownMovies = onlyAvailable
-    ? movies.filter(movie => movie.available)
-    : movies;
+  const text = query.trim().toLowerCase();
+
+  let shownMovies = movies;
+  if (onlyAvailable) {
+    shownMovies = shownMovies.filter(movie => movie.available);
+  }
+  if (text !== "") {
+    shownMovies = shownMovies.filter(movie =>
+      movie.title.toLowerCase().includes(text)
+    );
+  }
+
+
 
   function toggleAvailable() {
     setOnlyAvailable(!onlyAvailable);
@@ -31,7 +42,7 @@ function App() {
         l
 
         <div className="toolbar">
-          <SearchBar />
+          <SearchBar query={query} onQueryChange={setquery} />
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
             onClick={toggleAvailable}
