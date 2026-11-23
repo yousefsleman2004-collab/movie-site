@@ -1,18 +1,19 @@
+import { useState } from "react";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import MovieList from "./components/MovieList.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import AddMovieForm from "./components/AddMovieForm.jsx";
 import { movies } from "./data/movies.js";
-import { useState } from "react";
 
 function App() {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
-  const [query,setquery]=useState("");
-   const [genre, setGenre] = useState("all");
-   const [sortBy, setSortBy] = useState("rating");
+  const [query, setQuery] = useState("");
+  const [genre, setGenre] = useState("all");
+  const [sortBy, setSortBy] = useState("rating");
 
   const topRated = movies.filter(movie => movie.rating >= 8.7);
+
   const text = query.trim().toLowerCase();
 
   let shownMovies = movies;
@@ -27,8 +28,9 @@ function App() {
       movie.title.toLowerCase().includes(text)
     );
   }
+  shownMovies = [...shownMovies].sort(compareMovies);
 
- shownMovies = [...shownMovies].sort(compareMovies);
+  const isFiltered = onlyAvailable || genre !== "all" || text !== "";
 
   function compareMovies(a, b) {
     if (sortBy === "year") {
@@ -44,6 +46,12 @@ function App() {
     setOnlyAvailable(!onlyAvailable);
   }
 
+  function resetFilters() {
+    setOnlyAvailable(false);
+    setQuery("");
+    setGenre("all");
+  }
+
   return (
     <>
       <Header />
@@ -54,19 +62,33 @@ function App() {
         </section>
 
         <MovieList title="הכי מדורגים" movies={topRated} />
-        l
 
         <div className="toolbar">
-          <SearchBar query={query} onQueryChange={setquery}  genre={genre} onGenreChange={setGenre} sortBy={sortBy} onSortChange={setSortBy}/>
+          <SearchBar
+            query={query}
+            onQueryChange={setQuery}
+            genre={genre}
+            onGenreChange={setGenre}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+          />
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
             onClick={toggleAvailable}
           >
             רק זמינים לצפייה
           </button>
+          {isFiltered && (
+            <button className="btn" onClick={resetFilters}>
+              ניקוי
+            </button>
+          )}
         </div>
 
-        <MovieList title="כל הסרטים" movies={shownMovies} />
+        <MovieList
+          title={`כל הסרטים (${shownMovies.length})`}
+          movies={shownMovies}
+        />
 
         <AddMovieForm />
       </main>

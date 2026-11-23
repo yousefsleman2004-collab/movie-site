@@ -40,3 +40,10 @@
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
+
+
+/* שדה שמסנן עכשיו — מודגש */
+.search-bar__input--active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}

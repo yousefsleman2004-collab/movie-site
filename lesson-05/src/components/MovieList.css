@@ -15,3 +15,12 @@
 .movie-list + .movie-list {
   margin-top: 48px;
 }
+
+/* הודעה כשהרשימה ריקה */
+.movie-list__empty {
+  padding: 32px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--muted);
+}
