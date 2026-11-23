@@ -7,16 +7,17 @@ import AddMovieForm from "./components/AddMovieForm.jsx";
 import { movies } from "./data/movies.js";
 
 function App() {
+  const [movieList, setMovieList] = useState(movies);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [query, setQuery] = useState("");
   const [genre, setGenre] = useState("all");
   const [sortBy, setSortBy] = useState("rating");
 
-  const topRated = movies.filter(movie => movie.rating >= 8.7);
+  const topRated = movieList.filter(movie => movie.rating >= 8.7);
 
   const text = query.trim().toLowerCase();
 
-  let shownMovies = movies;
+  let shownMovies = movieList;
   if (onlyAvailable) {
     shownMovies = shownMovies.filter(movie => movie.available);
   }
@@ -50,6 +51,10 @@ function App() {
     setOnlyAvailable(false);
     setQuery("");
     setGenre("all");
+  }
+
+  function addMovie(movie) {
+    setMovieList([...movieList, movie]);
   }
 
   return (
@@ -90,7 +95,7 @@ function App() {
           movies={shownMovies}
         />
 
-        <AddMovieForm />
+        <AddMovieForm onAdd={addMovie} />
       </main>
       <Footer />
     </>

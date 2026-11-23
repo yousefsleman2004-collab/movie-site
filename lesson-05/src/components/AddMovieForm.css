@@ -75,3 +75,16 @@
 .add-movie__actions {
   grid-column: 1 / -1;
 }
+
+
+/* הודעת שגיאה ליד הכפתור */
+.add-movie__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-movie__error {
+  font-size: 14px;
+  color: #b3412e;
+}
