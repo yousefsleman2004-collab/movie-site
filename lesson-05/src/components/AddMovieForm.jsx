@@ -26,6 +26,33 @@ function AddMovieForm({ onAdd }) {
       setError("כתבו את שם הסרט");
       return;
     }
+    
+//check year
+const currentYear=new Date().getFullYear();
+const yearnum= Number(form.year);
+if(!form.year|| Number.isNaN(yearnum)||yearnum>currentYear||yearnum<1900)
+  {
+setError(`the year must be between 1900 to ${currentYear} `)
+return;
+}
+
+//check rating
+const ratingNum=Number(form.rating);
+if(form.rating==""||Number.isNaN(ratingNum)||ratingNum<0||ratingNum>10)
+{
+  setError("The rating must be between 0-10")
+  return;
+}
+const normalizedTitle = form.title.trim().toLowerCase();
+const isDuplicate = movies.some(
+  (movie) => movie.title.trim().toLowerCase() === normalizedTitle
+);
+
+if (isDuplicate) {
+  setError("הסרט כבר קיים בקטלוג");
+  return;
+}
+
 
     onAdd({
       id: Date.now(),

@@ -12,6 +12,11 @@ function App() {
   const [query, setQuery] = useState("");
   const [genre, setGenre] = useState("all");
   const [sortBy, setSortBy] = useState("rating");
+  const [sortAsc,setSortAsc]=useState(false);
+
+
+ 
+const genres=[...new Set(movieList.map((movie)=>movie.genre))];
 
   const topRated = movieList.filter(movie => movie.rating >= 8.7);
 
@@ -30,7 +35,7 @@ function App() {
     );
   }
   shownMovies = [...shownMovies].sort(compareMovies);
-
+  const displaymovies=sortAsc ?[...shownMovies].reverse() : shownMovies;
   const isFiltered = onlyAvailable || genre !== "all" || text !== "";
 
   function compareMovies(a, b) {
@@ -74,8 +79,11 @@ function App() {
             onQueryChange={setQuery}
             genre={genre}
             onGenreChange={setGenre}
+            genres={genres}
             sortBy={sortBy}
             onSortChange={setSortBy}
+            sortAsc={sortAsc}
+            onToggleSortOrder={()=> setSortAsc((prev)=>!prev)}
           />
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
@@ -91,11 +99,12 @@ function App() {
         </div>
 
         <MovieList
-          title={`כל הסרטים (${shownMovies.length})`}
-          movies={shownMovies}
+          title={`כל הסרטים ${shownMovies.length}`}
+          movies={displaymovies}
+          
         />
 
-        <AddMovieForm onAdd={addMovie} />
+        <AddMovieForm onAdd={addMovie}  movies={MovieList}/>
       </main>
       <Footer />
     </>

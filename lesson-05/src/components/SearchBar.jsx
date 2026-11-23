@@ -5,8 +5,11 @@ function SearchBar({
   onQueryChange,
   genre,
   onGenreChange,
+  genres,
   sortBy,
   onSortChange,
+  sortAsc,
+  onToggleSortOrder,
 }) {
   return (
     <div className="search-bar">
@@ -19,6 +22,8 @@ function SearchBar({
           value={query}
           onChange={e => onQueryChange(e.target.value)}
         />
+        {query && <button type="button" onClick={() => onQueryChange("")}>X</button>}
+       
       </label>
 
       <label className="search-bar__field">
@@ -29,10 +34,11 @@ function SearchBar({
           onChange={e => onGenreChange(e.target.value)}
         >
           <option value="all">כל הז׳אנרים</option>
-          <option value="Action">Action</option>
-          <option value="Animation">Animation</option>
-          <option value="Sci-Fi">Sci-Fi</option>
-          <option value="Thriller">Thriller</option>
+          {genres.map((g)=>(
+
+            <option key={g} value={g}>{g}</option>
+
+          ))}
         </select>
       </label>
 
@@ -47,6 +53,11 @@ function SearchBar({
           <option value="year">לפי שנה</option>
           <option value="title">לפי שם</option>
         </select>
+         <button type="button" onClick={onToggleSortOrder} title="הפוך כיוון מיון">
+          {sortAsc ? "up" : "down"}
+
+         </button>
+
       </label>
     </div>
   );
