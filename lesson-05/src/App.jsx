@@ -4,11 +4,12 @@ import MovieList from "./components/MovieList.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import AddMovieForm from "./components/AddMovieForm.jsx";
 import { movies } from "./data/movies.js";
+import { useState } from "react";
 
 function App() {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
 
-  const topRated = movies.find(movie => movie.rating >= 8.7);
+  const topRated = movies.filter(movie => movie.rating >= 8.7);
   const shownMovies = onlyAvailable
     ? movies.filter(movie => movie.available)
     : movies;
@@ -27,12 +28,13 @@ function App() {
         </section>
 
         <MovieList title="הכי מדורגים" movies={topRated} />
+        l
 
         <div className="toolbar">
           <SearchBar />
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
-            onclick={toggleAvailable}
+            onClick={toggleAvailable}
           >
             רק זמינים לצפייה
           </button>
